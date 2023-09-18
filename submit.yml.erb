@@ -1,0 +1,20 @@
+batch_connect:
+  template: "basic"
+#  set_host: "host=$(hostname -a)"
+
+script:
+  queue_name: <%= sh_partition %>
+  email_on_started: <%= bc_email_on_started %>
+  native:
+    - "-N 1"
+    - "-n"
+    - "<%= sh_num_cpus.blank? ? 1 : sh_num_cpus.to_i %>"
+    - "-t"
+    - "0-<%= bc_num_hours %>"
+    <%- unless sh_num_gpus.blank? or sh_num_gpus.to_i == 0 -%>
+    - "--gres=gpu:v100:<%= sh_num_gpus %>"
+    <%- end -%>
+    <%- unless bc_reservation.blank? -%>
+    - "--reservation=<%= bc_reservation %>"
+    <%- end -%>
+

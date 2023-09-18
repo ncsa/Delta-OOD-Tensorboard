@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+#
+# Load modules
+#
+
+<%- unless context.modules.blank? -%>
+# Purge the module environment to avoid conflicts
+module purge
+
+# Load additional modules
+# module load <%= context.modules %>
+module load opence
+#module load wmlce
+
+# List loaded modules
+module list
+<%- end -%>
+
+#
+# Start Tensorboard Server
+#
+
+# Set working directory to home directory
+cd "${HOME}"
+
+echo ${host}
+echo ${app_port}
+echo " tensorboard --logdir=<%= context.tb_logdir %> <%= context.tb_extra_args %> \
+            --host="${host}" \
+            --port="${app_port}" "
+
+# Launch the Tensorboard Server
+# start on 127.0.0.1, since TensorBoard doesn't support any kind of authentication
+# and we rely on authrevproxy to only allow authentified requests
+export TMPDIR=/tmp/$USER; 
+mkdir -p $TMPDIR; echo $TMPDIR
+tensorboard --logdir=<%= context.tb_logdir %> <%= context.tb_extra_args %> \
+            --host="${host}" \
+            --port="${app_port}"
+

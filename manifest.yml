@@ -1,0 +1,9 @@
+---
+name: TensorBoard
+category: Interactive Apps
+subcategory: Visualization
+role: batch_connect
+description: |
+  This app will launch [TensorBoard], [TensorFlow]'s Visualization Toolkit.
+  [TensorBoard]: https://www.tensorflow.org/guide/summaries_and_tensorboard
+  [TensorFlow]: https://www.tensorflow.org/

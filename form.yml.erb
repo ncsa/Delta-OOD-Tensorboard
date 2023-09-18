@@ -1,0 +1,55 @@
+# /tensorboard/form.yml.erb
+<%-
+  # get _list_partitions w/ GPUs
+  p_cmd = "sinfo -ho %R,%G | awk -F, '/gpu/ {print $1}' | sort -u"
+  begin
+    output, status = Open3.capture2e(p_cmd)
+    if status.success?
+      _list_partitions = output.split("\n").map(&:strip).reject(&:blank?).sort
+    else
+      raise output
+    end
+  rescue => e
+    _list_partitions = []
+    p_error = e.message.strip
+  end
+-%>
+---
+cluster: "delta"
+
+form:
+  - modules
+  - tb_logdir
+  - tb_extra_args
+  - sh_partition
+  - sh_num_cpus
+  - sh_num_gpus
+  - bc_num_hours
+  - bc_reservation
+  - bc_email_on_started
+
+attributes:
+
+  modules: "anaconda3"
+
+  tb_logdir:
+    label: "Tensorboard logdir"
+    required: true
+    help: "The directory that contains data to visualize."
+
+  tb_extra_args:
+    label: "Additional TensorBoard arguments (optional)"
+
+  sh_partition: "cpu"
+
+  sh_num_cpus: "8"
+
+  sh_num_gpus: "0"
+
+  bc_reservation:
+    label: "Name of reservation (leave empty if none)"
+    widget: "text_field"
+    value: ""
+
+  bc_num_hours:
+    label: "Runtime (in hours)"
