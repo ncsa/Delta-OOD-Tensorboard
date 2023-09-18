@@ -1,5 +1,7 @@
 ## `sh_ondemand`
 
+Original HAL app authored by @superdavidxp
+
 This [Tensorboard](https://www.tensorflow.org/tensorboard) OnDemand app runs through an authenticating reverse proxy. 
 
 Tensorboard doesn't provide any kind of authentication for its web interface, so on a shared environment, anybody 
