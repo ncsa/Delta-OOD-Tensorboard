@@ -24,7 +24,8 @@ form:
   - sh_partition
   - sh_num_cpus
   - sh_num_gpus
-  - bc_num_hours
+  - bc_duration
+  - bc_account
   - bc_reservation
   - bc_email_on_started
 
@@ -37,19 +38,26 @@ attributes:
     required: true
     help: "The directory that contains data to visualize."
 
-  tb_extra_args:
-    label: "Additional TensorBoard arguments (optional)"
+#  tb_extra_args:
+#    label: "Additional TensorBoard arguments (optional)"
 
-  sh_partition: "cpu"
+  sh_partition: "cpu-interactive"
 
   sh_num_cpus: "8"
 
   sh_num_gpus: "0"
+
+  bc_account:
+    label: "Name of account"
+    widget: "text_field"
+    value: ""
 
   bc_reservation:
     label: "Name of reservation (leave empty if none)"
     widget: "text_field"
     value: ""
 
-  bc_num_hours:
-    label: "Runtime (in hours)"
+  bc_duration:
+    label: "Duration of job"
+    widget: "text_field"
+    help: "Slurm format: DD-HH:MM:SS"

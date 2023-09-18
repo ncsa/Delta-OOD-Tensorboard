@@ -9,8 +9,8 @@
 module purge
 
 # Load additional modules
-# module load <%= context.modules %>
-module load opence
+module load <%= context.modules %>
+#module load opence
 #module load wmlce
 
 # List loaded modules
@@ -26,16 +26,16 @@ cd "${HOME}"
 
 echo ${host}
 echo ${app_port}
-echo " tensorboard --logdir=<%= context.tb_logdir %> <%= context.tb_extra_args %> \
+echo " tensorboard --logdir=<%= context.tb_logdir %> \
             --host="${host}" \
             --port="${app_port}" "
 
 # Launch the Tensorboard Server
 # start on 127.0.0.1, since TensorBoard doesn't support any kind of authentication
 # and we rely on authrevproxy to only allow authentified requests
-export TMPDIR=/tmp/$USER; 
+export TMPDIR=$HOME/.ood_tensorboard_tmp;
 mkdir -p $TMPDIR; echo $TMPDIR
-tensorboard --logdir=<%= context.tb_logdir %> <%= context.tb_extra_args %> \
+tensorboard --logdir=<%= context.tb_logdir %> \
             --host="${host}" \
             --port="${app_port}"
 
