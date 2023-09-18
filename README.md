@@ -1,6 +1,6 @@
 ## `sh_ondemand`
 
-Original HAL app authored by @superdavidxp
+Original HAL app authored by [@superdavidxp](https://github.com/superdavidxp)
 
 This [Tensorboard](https://www.tensorflow.org/tensorboard) OnDemand app runs through an authenticating reverse proxy. 
 
