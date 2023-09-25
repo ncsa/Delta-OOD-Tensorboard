@@ -20,10 +20,11 @@ cluster: "delta"
 form:
   - modules
   - tb_logdir
-  - tb_extra_args
+#  - tb_extra_args
   - sh_partition
   - sh_num_cpus
   - sh_num_gpus
+  - bc_num_memory
   - bc_duration
   - bc_account
   - bc_reservation
@@ -41,11 +42,33 @@ attributes:
 #  tb_extra_args:
 #    label: "Additional TensorBoard arguments (optional)"
 
-  sh_partition: "cpu-interactive"
+  sh_partition:
+    label: "Partition"
+    widget: "select"
+    value: "cpu-interactive"
+    help: "Interactive partitions are limited to 30 minutes."
+    options:
+      - ["cpu-interactive","cpu-interactive"]
+      - ["gpuA100x4-interactive","gpuA100x4-interactive"]
+      - ["gpuA40x4-interactive","gpuA40x4-interactive"]
+      - ["cpu","cpu"]
+      - ["gpuA100x4","gpuA100x4"]
+      - ["gpuA40x4","gpuA40x4"]
 
-  sh_num_cpus: "8"
+  sh_num_cpus:
+    label: "Number of CPUs"
+    widget: "number_field"
+    min: "1"
 
-  sh_num_gpus: "0"
+  sh_num_gpus:
+    label: "Number of GPUs"
+    widget: "number_field"
+    min: "0"
+
+  bc_num_memory:
+    label: "Amount of RAM"
+    widget: "text_field"
+    help: "Use Slurm format, e.g. 4096M, 10G. If left blank, 1000 MB will be allocated per CPU core requested."
 
   bc_account:
     label: "Name of account"
