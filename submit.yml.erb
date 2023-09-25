@@ -13,7 +13,10 @@ script:
     - "-t"
     - "<%= bc_duration %>"
     <%- unless sh_num_gpus.blank? or sh_num_gpus.to_i == 0 -%>
-    - "--gres=gpu:v100:<%= sh_num_gpus %>"
+    - "--gres=gpu:<%= sh_num_gpus %>"
+    <%- end -%>
+    <%- unless bc_num_memory.blank? %>
+    - "--mem=<%= bc_num_memory %>"
     <%- end -%>
     <%- unless bc_reservation.blank? -%>
     - "--reservation=<%= bc_reservation %>"
