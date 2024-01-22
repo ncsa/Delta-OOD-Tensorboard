@@ -7,7 +7,7 @@
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
-module load default
+module load default-s11
 
 # Load appropriate module based on partition
 <%- if context.bc_conda_module == 'default' -%>
