@@ -10,14 +10,12 @@ module purge
 module load default-s11
 
 # Load appropriate module based on partition
-<%- if context.bc_conda_module == 'default' -%>
-  <%- if context.sh_partition.include? 'gpu' -%>
-    module load anaconda3_gpu
-  <%- else -%>
-    module load anaconda3_cpu
-  <%- end -%>
+# Use specific non-default versions for compatibility
+# See SVCPLAN-3983 for details
+<%- if context.sh_partition.include? 'gpu' -%>
+  module load anaconda3_gpu/23.3.1
 <%- else -%>
-  module load <%= context.bc_conda_module %>
+  module load anaconda3_cpu/23.3.1
 <%- end -%>
 
 # List loaded modules

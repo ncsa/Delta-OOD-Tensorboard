@@ -21,7 +21,6 @@ form:
   - modules
   - tb_logdir
 #  - tb_extra_args
-  - bc_conda_module
   - sh_partition
   - sh_num_cpus
   - sh_num_gpus
@@ -42,24 +41,6 @@ attributes:
 
 #  tb_extra_args:
 #    label: "Additional TensorBoard arguments (optional)"
-
-  bc_conda_module:
-    label: "Specific Anaconda module to use"
-    widget: "select"
-    value: "default"
-    options:
-      - ["System Default", "default"]
-      - ["anaconda3_Rcpu/22.9.0", "anaconda3_Rcpu/22.9.0"]
-      - ["anaconda3_cpu/23.3.1", "anaconda3_cpu/23.3.1"]
-      - ["anaconda3_cpu/23.7.4", "anaconda3_cpu/23.7.4"]
-      - ["anaconda3_gpu/22.10.0", "anaconda3_gpu/22.10.0"]
-      - ["anaconda3_gpu/23.3.1", "anaconda3_gpu/23.3.1"]
-      - ["anaconda3_gpu/23.7.4", "anaconda3_gpu/23.7.4"]
-      - ["anaconda3_gpu/23.9.0", "anaconda3_gpu/23.9.0"]
-      - ["anaconda3_mi100/4.14.0", "anaconda3_mi100/4.14.0"]
-      - ["anaconda3_mi100/23.7.4", "anaconda3_mi100/23.7.4"]
-      - ["anaconda3_x86_64/23.3.1", "anaconda3_x86_64/23.3.1"]
-      - ["anaconda3_x86_64/23.7.4", "anaconda3_x86_64/23.7.4"]
 
   sh_partition:
     label: "Partition"
