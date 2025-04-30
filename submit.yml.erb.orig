@@ -3,7 +3,7 @@ batch_connect:
 #  set_host: "host=$(hostname -a)"
 
 script:
-  accounting_id: "<%= bc_account.strip %>"
+  accounting_id: "<%= bc_account %>"
   queue_name: <%= sh_partition %>
   email_on_started: <%= bc_email_on_started %>
   native:
@@ -11,14 +11,14 @@ script:
     - "-n"
     - "<%= sh_num_cpus.blank? ? 1 : sh_num_cpus.to_i %>"
     - "-t"
-    - "<%= bc_duration.strip %>"
+    - "<%= bc_duration %>"
     <%- unless sh_num_gpus.blank? or sh_num_gpus.to_i == 0 -%>
     - "--gres=gpu:<%= sh_num_gpus %>"
     <%- end -%>
     <%- unless bc_num_memory.blank? %>
-    - "--mem=<%= bc_num_memory.strip %>"
+    - "--mem=<%= bc_num_memory %>"
     <%- end -%>
     <%- unless bc_reservation.blank? -%>
-    - "--reservation=<%= bc_reservation.strip %>"
+    - "--reservation=<%= bc_reservation %>"
     <%- end -%>
 
