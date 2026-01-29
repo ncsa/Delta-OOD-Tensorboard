@@ -7,16 +7,24 @@
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
-module load default-s11
 
-# Load appropriate module based on partition
-# Use specific non-default versions for compatibility
-# See SVCPLAN-3983 for details
-<%- if context.sh_partition.include? 'gpu' -%>
+# Load the required modules
+if uname -r | grep -q "el9"; then
+  # RHEL 9 environment
+  module load default
+  module load tensorflow-conda
+else
+  # RHEL 8 environment
+  # Load appropriate module based on partition
+  # Use specific non-default versions for compatibility
+  # See SVCPLAN-3983 for details
+  module load default-s11
+<%- if context.bc_partition.include? 'gpu' -%>
   module load anaconda3_gpu/23.3.1
 <%- else -%>
   module load anaconda3_cpu/23.3.1
 <%- end -%>
+fi
 
 # List loaded modules
 module list
