@@ -4,16 +4,16 @@ batch_connect:
 
 script:
   accounting_id: "<%= bc_account %>"
-  queue_name: <%= sh_partition %>
+  queue_name: <%= bc_partition %>
   email_on_started: <%= bc_email_on_started %>
   native:
     - "-N 1"
     - "-n"
-    - "<%= sh_num_cpus.blank? ? 1 : sh_num_cpus.to_i %>"
+    - "<%= bc_num_cpus.blank? ? 1 : bc_num_cpus.to_i %>"
     - "-t"
     - "<%= bc_duration %>"
-    <%- unless sh_num_gpus.blank? or sh_num_gpus.to_i == 0 -%>
-    - "--gres=gpu:<%= sh_num_gpus %>"
+    <%- unless bc_num_gpus.blank? or bc_num_gpus.to_i == 0 -%>
+    - "--gres=gpu:<%= bc_num_gpus %>"
     <%- end -%>
     <%- unless bc_num_memory.blank? %>
     - "--mem=<%= bc_num_memory %>"
