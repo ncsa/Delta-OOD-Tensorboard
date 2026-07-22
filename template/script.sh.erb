@@ -9,21 +9,15 @@
 module purge
 
 # Load the required modules
-if uname -r | grep -q "el9"; then
-  # RHEL 9 environment
+
+if uname -r | grep -q "el9_6"; then
+  # RHEL 9.6 environment
+  module load default-rh96
+  module load pytorch-conda/2.8
+else
+  # RHEL 9.4 environment
   module load default
   module load tensorflow-conda
-else
-  # RHEL 8 environment
-  # Load appropriate module based on partition
-  # Use specific non-default versions for compatibility
-  # See SVCPLAN-3983 for details
-  module load default-s11
-<%- if context.bc_partition.include? 'gpu' -%>
-  module load anaconda3_gpu/23.3.1
-<%- else -%>
-  module load anaconda3_cpu/23.3.1
-<%- end -%>
 fi
 
 # List loaded modules
